@@ -19,8 +19,8 @@ class Todo extends React.Component {
           <InputBase
             inputProps={{ "aria-label": "naked" }}
             type="text"
-            id={"item.id"}
-            name={"item.id"}
+            id={item.id.toString()}
+            name={item.id.toString()}
             value={item.title}
             multiline={true}
             fullWidth={true}
