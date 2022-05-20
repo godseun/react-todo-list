@@ -1,10 +1,6 @@
 import React from "react";
-import {
-  ListItem,
-  ListItemText,
-  InputBase,
-  Checkbox,
-} from "@material-ui/core";
+
+import { ListItem, ListItemText, InputBase, Checkbox } from "@material-ui/core";
 
 class Todo extends React.Component {
   constructor(props) {
@@ -23,8 +19,8 @@ class Todo extends React.Component {
           <InputBase
             inputProps={{ "aria-label": "naked" }}
             type="text"
-            id={item.id}
-            name={item.id}
+            id={"item.id"}
+            name={"item.id"}
             value={item.title}
             multiline={true}
             fullWidth={true}
