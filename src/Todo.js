@@ -31,6 +31,12 @@ class Todo extends React.Component {
     });
   };
 
+  editEventHandler = (e) => {
+    const thisItem = this.state.item;
+    thisItem.title = e.target.value;
+    this.setState({ item: thisItem });
+  };
+
   enterKeyEventHandler = (e) => {
     if (e.key === "Enter") {
       this.setState({ readOnly: true });
@@ -49,6 +55,7 @@ class Todo extends React.Component {
               readOnly: this.state.readOnly,
             }}
             onClick={this.offReadOnlyMode}
+            onChange={this.editEventHandler}
             onKeyDown={this.enterKeyEventHandler}
             type="text"
             id={item.id.toString()}
