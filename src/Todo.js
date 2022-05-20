@@ -24,6 +24,12 @@ class Todo extends React.Component {
     this.delete(this.state.item);
   };
 
+  checkboxEventHandler = (e) => {
+    const thisItem = this.state.item;
+    thisItem.done = !thisItem.done;
+    this.setState({ item: thisItem });
+  };
+
   offReadOnlyMode = () => {
     console.log("Event!", this.state.readOnly);
     this.setState({ readOnly: false }, () => {
@@ -47,7 +53,7 @@ class Todo extends React.Component {
     const item = this.state.item;
     return (
       <ListItem>
-        <Checkbox checked={item.done} />
+        <Checkbox checked={item.done} onChange={this.checkboxEventHandler} />
         <ListItemText>
           <InputBase
             inputProps={{
