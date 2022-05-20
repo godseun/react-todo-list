@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import React from 'react';
 import Todo from './Todo';
@@ -8,14 +7,20 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      item: {id:0, title: "Hello World 1", done: true},
+      items: [
+        {id:0, title: "Hello World 1", done: true},
+        {id:1, title: "Hello World 2", done: false},
+      ]
     };
   }
 
   render() {
+    const todoItems = this.state.items.map((item, idx) => {
+      return <Todo item={item} key={item.id} />
+    })
     return (
       <div className="App">
-        <Todo item={this.state.item} />
+        {todoItems}
       </div>
     )
   }
