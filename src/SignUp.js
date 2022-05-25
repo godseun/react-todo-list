@@ -1,15 +1,16 @@
 import React from "react";
-import { signin } from "./service/ApiService";
 import {
   Button,
   TextField,
-  Grid,
-  Typography,
-  Container,
   Link,
+  Grid,
+  Container,
+  Typography,
 } from "@material-ui/core";
 
-class Login extends React.Component {
+import { signup } from "./service/ApiService";
+
+class SignUp extends React.Component {
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -17,34 +18,48 @@ class Login extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+
     const data = new FormData(event.target);
+    const userName = data.get("userName");
     const email = data.get("email");
     const password = data.get("password");
-    signin({ email: email, password: password });
+    signup({ email: email, userName: userName, password: password }).then(
+      (response) => {
+        window.location.href = "/login";
+      }
+    );
   }
 
   render() {
     return (
       <Container component="main" maxWidth="xs" style={{ marginTop: "8%" }}>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <Typography component="h1" variant="h5">
-              로그인
-            </Typography>
-          </Grid>
-        </Grid>
-
         <form noValidate onSubmit={this.handleSubmit}>
-          {" "}
           <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <Typography component="h1" variant="h5">
+                계정생성
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                autoComplete="fname"
+                name="userName"
+                variant="outlined"
+                required
+                fullWidth
+                id="userName"
+                label="사용자 이름"
+                autoFocus
+              />
+            </Grid>
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
                 required
                 fullWidth
-                id="email"
                 label="이메일 주소"
                 name="email"
+                id="email"
                 autoComplete="email"
               />
             </Grid>
@@ -53,9 +68,8 @@ class Login extends React.Component {
                 variant="outlined"
                 required
                 fullWidth
-                name="password"
                 label="패스워드"
-                type="password"
+                name="password"
                 id="password"
                 autoComplete="current-password"
               />
@@ -67,16 +81,18 @@ class Login extends React.Component {
                 variant="contained"
                 color="primary"
               >
-                로그인
+                계정 생성
               </Button>
             </Grid>
-            <Grid
-              container
-              justifyContent="center"
-              style={{ marginTop: "10%", marginBottom: "5%" }}
-            >
-              <Link href="/signup" variant="body2">
-                계정이 없습니까? 여기서 가입 하세요.
+          </Grid>
+          <Grid
+            container
+            justifyContent="center"
+            style={{ marginTop: "10%", marginBottom: "5%" }}
+          >
+            <Grid item>
+              <Link href="/login" variant="body2">
+                이미 계정이 있습니까? 로그인 하세요.
               </Link>
             </Grid>
           </Grid>
@@ -86,4 +102,4 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+export default SignUp;
